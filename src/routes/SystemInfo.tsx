@@ -1,5 +1,24 @@
 import { useApp } from "@/contexts/AppContext";
-import { Copy, Check } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  Copy,
+  Check,
+  Monitor,
+  User,
+  Palette,
+  Settings,
+  Flag,
+  Info,
+} from "lucide-react";
 import { useState } from "react";
 
 export default function SystemInfo() {
@@ -60,260 +79,297 @@ export default function SystemInfo() {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6">
-      {/* Header */}
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-3xl font-bold tracking-tight">
             Información del Sistema
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            Detalles completos del contexto de la aplicación
+          </h2>
+          <p className="text-muted-foreground">
+            Detalles del contexto de la aplicación
           </p>
         </div>
-        <button
-          onClick={copyToClipboard}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
+        <Button onClick={copyToClipboard} variant="outline">
           {copied ? (
             <>
-              <Check className="w-4 h-4" />
+              <Check className="mr-2 h-4 w-4" />
               Copiado
             </>
           ) : (
             <>
-              <Copy className="w-4 h-4" />
+              <Copy className="mr-2 h-4 w-4" />
               Copiar Todo
             </>
           )}
-        </button>
+        </Button>
       </div>
 
-      {/* Grid de Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* 1. PLATAFORMA */}
-        <Card title="📱 Plataforma">
-          <InfoRow label="Tipo" value={platform.toUpperCase()} highlight />
-          <InfoRow label="En Teams" value={isInTeams ? "✅ Sí" : "❌ No"} />
-          <InfoRow label="Web" value={isWeb ? "✅ Sí" : "❌ No"} />
-          <InfoRow label="iOS" value={isIOS ? "✅ Sí" : "❌ No"} />
-          <InfoRow label="Android" value={isAndroid ? "✅ Sí" : "❌ No"} />
-          <InfoRow label="Móvil" value={isMobile ? "✅ Sí" : "❌ No"} />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {/* Plataforma */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Monitor className="h-5 w-5" />
+              Plataforma
+            </CardTitle>
+            <CardDescription>Información del dispositivo</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Tipo</span>
+              <Badge variant="secondary">{platform.toUpperCase()}</Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">En Teams</span>
+              <Badge variant={isInTeams ? "default" : "outline"}>
+                {isInTeams ? "Sí" : "No"}
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Web</span>
+              <Badge variant={isWeb ? "default" : "outline"}>
+                {isWeb ? "Sí" : "No"}
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">iOS</span>
+              <Badge variant={isIOS ? "default" : "outline"}>
+                {isIOS ? "Sí" : "No"}
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Android</span>
+              <Badge variant={isAndroid ? "default" : "outline"}>
+                {isAndroid ? "Sí" : "No"}
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Móvil</span>
+              <Badge variant={isMobile ? "default" : "outline"}>
+                {isMobile ? "Sí" : "No"}
+              </Badge>
+            </div>
+          </CardContent>
         </Card>
 
-        {/* 2. USUARIO */}
-        <Card title="👤 Usuario">
-          {isAuthenticated && user ? (
-            <>
-              <InfoRow label="Estado" value="✅ Autenticado" highlight />
-              <InfoRow label="ID" value={user.id || "N/A"} />
-              <InfoRow label="Nombre" value={user.name || "N/A"} />
-              <InfoRow label="Email" value={user.email || "N/A"} />
-              {user.role && <InfoRow label="Rol" value={user.role} />}
-              <button
-                onClick={logout}
-                className="mt-4 w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm transition-colors"
-              >
-                Cerrar Sesión
-              </button>
-            </>
-          ) : (
-            <InfoRow label="Estado" value="❌ No autenticado" highlight />
-          )}
-        </Card>
-
-        {/* 3. TEMA */}
-        <Card title="🎨 Tema">
-          <InfoRow label="Actual" value={theme.toUpperCase()} highlight />
-          <div className="mt-4 space-y-2">
-            <button
-              onClick={() => setTheme("light")}
-              className={`w-full px-4 py-2 rounded text-sm transition-colors ${
-                theme === "light"
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
-              }`}
-            >
-              ☀️ Claro
-            </button>
-            <button
-              onClick={() => setTheme("dark")}
-              className={`w-full px-4 py-2 rounded text-sm transition-colors ${
-                theme === "dark"
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
-              }`}
-            >
-              🌙 Oscuro
-            </button>
-            <button
-              onClick={() => setTheme("default")}
-              className={`w-full px-4 py-2 rounded text-sm transition-colors ${
-                theme === "default"
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
-              }`}
-            >
-              🔄 Sistema
-            </button>
-          </div>
-        </Card>
-
-        {/* 4. CONFIGURACIÓN */}
-        <Card title="⚙️ Configuración">
-          {userConfig ? (
-            <>
-              <InfoRow
-                label="Idioma"
-                value={userConfig.language || "No definido"}
-              />
-              <InfoRow
-                label="Notificaciones"
-                value={
-                  userConfig.notifications ? "✅ Activadas" : "❌ Desactivadas"
-                }
-              />
-              <InfoRow
-                label="Zona Horaria"
-                value={userConfig.timezone || "No definida"}
-              />
-              {userConfig.preferences && (
-                <div className="mt-3 p-2 bg-gray-100 dark:bg-gray-700 rounded text-xs">
-                  <code className="text-gray-800 dark:text-gray-200">
-                    {JSON.stringify(userConfig.preferences, null, 2)}
-                  </code>
+        {/* Usuario */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <User className="h-5 w-5" />
+              Usuario
+            </CardTitle>
+            <CardDescription>Información de sesión</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {isAuthenticated && user ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Estado</span>
+                  <Badge>Autenticado</Badge>
                 </div>
-              )}
-            </>
-          ) : (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
-              Sin configuración guardada
-            </p>
-          )}
-        </Card>
-
-        {/* 5. FEATURE FLAGS */}
-        <Card title="🚩 Feature Flags">
-          {Object.keys(featureFlags).length > 0 ? (
-            <div className="space-y-2">
-              {Object.entries(featureFlags).map(([key, enabled]) => (
-                <div
-                  key={key}
-                  className="flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-gray-700 rounded"
+                <Separator />
+                <div className="space-y-2">
+                  <div>
+                    <p className="text-xs text-muted-foreground">ID</p>
+                    <p className="text-sm font-medium">{user.id || "N/A"}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Nombre</p>
+                    <p className="text-sm font-medium">{user.name || "N/A"}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Email</p>
+                    <p className="text-sm font-medium">{user.email || "N/A"}</p>
+                  </div>
+                  {user.role && (
+                    <div>
+                      <p className="text-xs text-muted-foreground">Rol</p>
+                      <p className="text-sm font-medium">{user.role}</p>
+                    </div>
+                  )}
+                </div>
+                <Separator />
+                <Button
+                  onClick={logout}
+                  variant="destructive"
+                  className="w-full"
                 >
-                  <span className="text-sm font-medium">{key}</span>
-                  <span className={enabled ? "text-green-600" : "text-red-600"}>
-                    {enabled ? "✅" : "❌"}
-                  </span>
+                  Cerrar Sesión
+                </Button>
+              </>
+            ) : (
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">Estado</span>
+                <Badge variant="outline">No autenticado</Badge>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Tema */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Palette className="h-5 w-5" />
+              Tema
+            </CardTitle>
+            <CardDescription>Preferencia de visualización</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Actual</span>
+              <Badge variant="secondary">{theme.toUpperCase()}</Badge>
+            </div>
+            <Separator />
+            <div className="space-y-2">
+              <Button
+                onClick={() => setTheme("light")}
+                variant={theme === "light" ? "default" : "outline"}
+                className="w-full"
+              >
+                ☀️ Claro
+              </Button>
+              <Button
+                onClick={() => setTheme("dark")}
+                variant={theme === "dark" ? "default" : "outline"}
+                className="w-full"
+              >
+                🌙 Oscuro
+              </Button>
+              <Button
+                onClick={() => setTheme("default")}
+                variant={theme === "default" ? "default" : "outline"}
+                className="w-full"
+              >
+                🔄 Sistema
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Configuración */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Settings className="h-5 w-5" />
+              Configuración
+            </CardTitle>
+            <CardDescription>Preferencias del usuario</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {userConfig ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Idioma</span>
+                  <Badge variant="outline">
+                    {userConfig.language || "No definido"}
+                  </Badge>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
-              No hay feature flags cargados
-            </p>
-          )}
-        </Card>
-
-        {/* 6. ESTADO DEL SISTEMA */}
-        <Card title="🔧 Estado del Sistema">
-          <InfoRow
-            label="Inicializado"
-            value={isInitialized ? "✅ Sí" : "❌ No"}
-            highlight
-          />
-          <InfoRow label="User Agent" value={navigator.userAgent} truncate />
-          <InfoRow label="URL" value={window.location.href} truncate />
-          <InfoRow label="Idioma del navegador" value={navigator.language} />
-          <InfoRow
-            label="Online"
-            value={navigator.onLine ? "✅ Sí" : "❌ No"}
-          />
-        </Card>
-      </div>
-
-      {/* Sección de ejemplo de uso de Feature Flags */}
-      <Card title="💡 Ejemplo de Feature Flags en acción">
-        <div className="space-y-3">
-          {isFeatureEnabled("newUI") && (
-            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded">
-              <p className="text-purple-800 dark:text-purple-200 font-semibold">
-                🎉 Nueva UI habilitada
-              </p>
-            </div>
-          )}
-          {isFeatureEnabled("aiChat") && (
-            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded">
-              <p className="text-blue-800 dark:text-blue-200 font-semibold">
-                🤖 Chat AI habilitado
-              </p>
-            </div>
-          )}
-          {isFeatureEnabled("betaMode") && (
-            <div className="p-3 bg-yellow-100 dark:bg-yellow-900 rounded">
-              <p className="text-yellow-800 dark:text-yellow-200 font-semibold">
-                🧪 Modo Beta activo
-              </p>
-            </div>
-          )}
-          {!isFeatureEnabled("newUI") &&
-            !isFeatureEnabled("aiChat") &&
-            !isFeatureEnabled("betaMode") && (
-              <p className="text-gray-500 dark:text-gray-400 text-sm">
-                No hay features activas para mostrar
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">
+                    Notificaciones
+                  </span>
+                  <Badge
+                    variant={userConfig.notifications ? "default" : "outline"}
+                  >
+                    {userConfig.notifications ? "Activadas" : "Desactivadas"}
+                  </Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">
+                    Zona Horaria
+                  </span>
+                  <Badge variant="outline">
+                    {userConfig.timezone || "No definida"}
+                  </Badge>
+                </div>
+                {userConfig.preferences && (
+                  <>
+                    <Separator />
+                    <div className="p-2 bg-muted rounded text-xs">
+                      <code className="text-sm">
+                        {JSON.stringify(userConfig.preferences, null, 2)}
+                      </code>
+                    </div>
+                  </>
+                )}
+              </>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                Sin configuración guardada
               </p>
             )}
-        </div>
-      </Card>
-    </div>
-  );
-}
+          </CardContent>
+        </Card>
 
-// Componente Card reutilizable
-function Card({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-      <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-        {title}
-      </h2>
-      <div className="space-y-3">{children}</div>
-    </div>
-  );
-}
+        {/* Feature Flags */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Flag className="h-5 w-5" />
+              Feature Flags
+            </CardTitle>
+            <CardDescription>Características habilitadas</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {Object.keys(featureFlags).length > 0 ? (
+              Object.entries(featureFlags).map(([key, enabled]) => (
+                <div key={key} className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">{key}</span>
+                  <Badge variant={enabled ? "default" : "outline"}>
+                    {enabled ? "Activo" : "Inactivo"}
+                  </Badge>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                No hay feature flags cargados
+              </p>
+            )}
+          </CardContent>
+        </Card>
 
-// Componente InfoRow reutilizable
-function InfoRow({
-  label,
-  value,
-  highlight = false,
-  truncate = false,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-  truncate?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
-        {label}
-      </span>
-      <span
-        className={`text-sm ${
-          highlight
-            ? "font-bold text-blue-600 dark:text-blue-400"
-            : "text-gray-700 dark:text-gray-300"
-        } ${truncate ? "truncate" : ""}`}
-        title={truncate ? value : undefined}
-      >
-        {value}
-      </span>
+        {/* Estado del Sistema */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Info className="h-5 w-5" />
+              Estado del Sistema
+            </CardTitle>
+            <CardDescription>Información técnica</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">
+                Inicializado
+              </span>
+              <Badge variant={isInitialized ? "default" : "outline"}>
+                {isInitialized ? "Sí" : "No"}
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Online</span>
+              <Badge variant={navigator.onLine ? "default" : "outline"}>
+                {navigator.onLine ? "Sí" : "No"}
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Idioma</span>
+              <Badge variant="outline">{navigator.language}</Badge>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-xs text-muted-foreground mb-1">User Agent</p>
+              <p className="text-xs break-all">{navigator.userAgent}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground mb-1">URL</p>
+              <p className="text-xs break-all">{window.location.href}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
