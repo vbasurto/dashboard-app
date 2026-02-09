@@ -30,14 +30,6 @@ export default function Sidebar() {
             <PanelLeftClose className="h-5 w-5" />
           )}
         </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={closeSidebar}
-          className="md:hidden"
-        >
-          <X className="h-5 w-5" />
-        </Button>
       </div>
 
       <Separator />

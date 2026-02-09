@@ -26,6 +26,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -44,80 +45,233 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ============================================ */
+/* TEMA CLARO - AZUL LALA DOMINANTE            */
+/* ============================================ */
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+
+  /* Fondos - Blanco limpio con toques de azul */
+  --background: oklch(0.99 0 0);
+  /* Blanco puro */
+  --foreground: oklch(0.25 0.03 265);
+  /* Azul LALA oscuro para texto */
+
+  /* Cards - Blanco puro */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.25 0.03 265);
+
+  /* Popovers */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.25 0.03 265);
+
+  /* PRIMARIO - Azul LALA #1C3C87 (PROTAGONISTA) */
+  --primary: oklch(0.32 0.12 265);
+  /* Azul LALA */
+  --primary-foreground: oklch(0.99 0 0);
+  /* Blanco */
+
+  /* SECUNDARIO - Azul más claro (variación del azul LALA) */
+  --secondary: oklch(0.95 0.01 265);
+  /* Azul muy claro, casi blanco */
+  --secondary-foreground: oklch(0.32 0.12 265);
+  /* Azul LALA */
+
+  /* Elementos mutados - Grises con tinte azul */
+  --muted: oklch(0.96 0.005 265);
+  /* Gris muy claro azulado */
+  --muted-foreground: oklch(0.50 0.02 265);
+  /* Gris medio azulado */
+
+  /* ACENTO - Azul LALA más brillante */
+  --accent: oklch(0.92 0.02 265);
+  /* Azul muy claro para hover */
+  --accent-foreground: oklch(0.28 0.12 265);
+  /* Azul LALA oscuro */
+
+  /* Destructivo - Rojo sutil solo para errores críticos */
+  --destructive: oklch(0.55 0.22 25);
+  /* Rojo */
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Bordes - Azul muy sutil */
+  --border: oklch(0.90 0.01 265);
+  /* Borde con tinte azul */
+  --input: oklch(0.94 0.01 265);
+  /* Input con tinte azul */
+  --ring: oklch(0.32 0.12 265);
+  /* Azul LALA para focus */
+
+  /* Charts - Variaciones de azul principalmente */
+  --chart-1: oklch(0.32 0.12 265);
+  /* Azul LALA */
+  --chart-2: oklch(0.45 0.14 265);
+  /* Azul medio */
+  --chart-3: oklch(0.60 0.12 260);
+  /* Azul claro */
+  --chart-4: oklch(0.75 0.08 255);
+  /* Azul muy claro */
+  --chart-5: oklch(0.85 0.04 250);
+  /* Azul pastel */
+
+  /* SIDEBAR - Todo Azul LALA */
+  --sidebar: oklch(0.32 0.12 265);
+  /* Azul LALA sólido */
+  --sidebar-foreground: oklch(0.99 0 0);
+  /* Blanco */
+  --sidebar-primary: oklch(0.42 0.14 265);
+  /* Azul más brillante para activo */
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.38 0.13 265);
+  /* Azul intermedio para hover */
+  --sidebar-accent-foreground: oklch(0.99 0 0);
+  --sidebar-border: oklch(0.42 0.14 265 / 50%);
+  /* Borde azul translúcido */
+  --sidebar-ring: oklch(0.60 0.12 260);
+  /* Azul claro para focus */
 }
 
+/* ============================================ */
+/* TEMA OSCURO - AZUL LALA PROFUNDO            */
+/* ============================================ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Fondos oscuros con base azul */
+  --background: oklch(0.12 0.02 265);
+  /* Azul muy oscuro, casi negro */
+  --foreground: oklch(0.95 0.01 265);
+  /* Blanco con tinte azul */
+
+  /* Cards elevadas */
+  --card: oklch(0.18 0.03 265);
+  /* Azul oscuro */
+  --card-foreground: oklch(0.95 0.01 265);
+
+  /* Popovers */
+  --popover: oklch(0.16 0.02 265);
+  --popover-foreground: oklch(0.95 0.01 265);
+
+  /* PRIMARIO - Azul LALA brillante */
+  --primary: oklch(0.55 0.16 265);
+  /* Azul LALA más brillante */
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* SECUNDARIO - Azul oscuro */
+  --secondary: oklch(0.25 0.04 265);
+  /* Azul oscuro */
+  --secondary-foreground: oklch(0.95 0.01 265);
+
+  /* Muted - Grises azulados */
+  --muted: oklch(0.22 0.03 265);
+  --muted-foreground: oklch(0.60 0.02 265);
+
+  /* ACENTO - Azul medio */
+  --accent: oklch(0.28 0.04 265);
+  --accent-foreground: oklch(0.95 0.01 265);
+
+  /* Destructivo */
+  --destructive: oklch(0.60 0.24 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Bordes sutiles */
+  --border: oklch(0.95 0.01 265 / 12%);
+  --input: oklch(0.95 0.01 265 / 15%);
+  --ring: oklch(0.55 0.16 265);
+
+  /* Charts - Azules brillantes */
+  --chart-1: oklch(0.55 0.16 265);
+  /* Azul LALA brillante */
+  --chart-2: oklch(0.65 0.14 265);
+  /* Azul medio brillante */
+  --chart-3: oklch(0.75 0.12 260);
+  /* Azul claro */
+  --chart-4: oklch(0.70 0.10 255);
+  /* Azul cielo */
+  --chart-5: oklch(0.80 0.08 250);
+  /* Azul pastel */
+
+  /* SIDEBAR - Azul profundo */
+  --sidebar: oklch(0.15 0.03 265);
+  /* Azul muy oscuro */
+  --sidebar-foreground: oklch(0.95 0.01 265);
+  --sidebar-primary: oklch(0.55 0.16 265);
+  /* Azul LALA brillante */
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.22 0.04 265);
+  --sidebar-accent-foreground: oklch(0.95 0.01 265);
+  --sidebar-border: oklch(0.95 0.01 265 / 10%);
+  --sidebar-ring: oklch(0.55 0.16 265);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================ */
+/* UTILIDADES DE AZUL LALA                     */
+/* ============================================ */
+@layer utilities {
+
+  /* Backgrounds graduales de azul */
+  .bg-lala-primary {
+    background-color: oklch(0.32 0.12 265);
+  }
+
+  .bg-lala-light {
+    background-color: oklch(0.92 0.02 265);
+  }
+
+  .bg-lala-medium {
+    background-color: oklch(0.45 0.14 265);
+  }
+
+  /* Gradientes de azul */
+  .bg-gradient-lala {
+    background: linear-gradient(135deg,
+        oklch(0.32 0.12 265) 0%,
+        oklch(0.45 0.14 265) 100%);
+  }
+
+  .bg-gradient-lala-soft {
+    background: linear-gradient(135deg,
+        oklch(0.92 0.02 265) 0%,
+        oklch(0.99 0 0) 100%);
+  }
+
+  /* Textos en azul */
+  .text-lala-primary {
+    color: oklch(0.32 0.12 265);
+  }
+
+  /* Tema oscuro */
+  .dark .bg-lala-primary {
+    background-color: oklch(0.55 0.16 265);
+  }
+
+  .dark .bg-lala-light {
+    background-color: oklch(0.28 0.04 265);
+  }
+
+  .dark .bg-lala-medium {
+    background-color: oklch(0.45 0.14 265);
+  }
+
+  .dark .text-lala-primary {
+    color: oklch(0.55 0.16 265);
+  }
+
+  /* Hover states con azul */
+  .hover-lala:hover {
+    background-color: oklch(0.38 0.13 265);
+    transition: background-color 0.2s ease;
+  }
+
+  .dark .hover-lala:hover {
+    background-color: oklch(0.28 0.04 265);
   }
 }

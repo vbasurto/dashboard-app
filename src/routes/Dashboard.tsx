@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { BarChart3, DollarSign, ShoppingCart, Users } from "lucide-react";
+import { UserInfo } from "@/components/UserInfo";
 
 export default function Dashboard() {
   const stats = [
@@ -40,6 +41,9 @@ export default function Dashboard() {
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <p className="text-muted-foreground">Resumen general de tu negocio</p>
+        <div>
+          <UserInfo />
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
